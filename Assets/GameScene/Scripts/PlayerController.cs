@@ -36,11 +36,20 @@ namespace Hunkoro
         {
             return playerLevel;
         }
+
         //移動に使うので取得
         private new Rigidbody2D rigidbody;
         //横移動の速度
         [SerializeField]
         private float sideMovingSpeed;
+        //横移動の速度制限
+        [SerializeField]
+        private float speedLimit;
+        /*スプライトの幅を取得する
+        * マウスカーソルがスプライトの幅の範囲にあれば移動させない
+        * そうすることでまっすぐ進みたいときのブレをなくす
+        */
+        private float spriteWidth;
 
         //全体の速度を指定?
         [SerializeField]
@@ -60,6 +69,8 @@ namespace Hunkoro
             //状態、大きさをセット
             GameMode = GAMEMODE.PLAY;
             playerLevel = PLAYER_LEVEL.FIRST;
+            //スプライトの幅を取得
+            spriteWidth = GetComponent<SpriteRenderer>().bounds.size.x;
         }
 
         // Update is called once per frame
@@ -98,25 +109,35 @@ namespace Hunkoro
             Vector2 pos = Input.mousePosition;
             // マウス位置座標をスクリーン座標からワールド座標に変換する
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(pos);
+
             //マウスがPlayerより左にあれば
-            if (worldPos.x < transform.position.x)
+            if (worldPos.x + spriteWidth / 4 < transform.position.x)
             {
-                rigidbody.AddForce(new Vector2((sideMovingSpeed * -1), 0));
+                rigidbody.AddForce(new Vector2((sideMovingSpeed * -1), 0) - rigidbody.velocity);
             }
             //マウスが右にあれば
-            else if (transform.position.x < worldPos.x)
+            else if (transform.position.x < worldPos.x - spriteWidth / 4)
             {
-                rigidbody.AddForce(new Vector2(sideMovingSpeed, 0), ForceMode2D.Force);
+                rigidbody.AddForce(new Vector2(sideMovingSpeed, 0) - rigidbody.velocity);
 
             }
+            //マウスが真ん中（？
+            else
+            {
+                rigidbody.velocity = new Vector2(0, 0);
+            }
 
+            //これは結局rigidbody使っていないせいで当たり判定が怪しくなるので却下
+            // このスクリプトがアタッチされたゲームオブジェクトを、マウス位置に線形補間で追従させる
+            //transform.position = Vector2.Lerp(transform.position, new Vector2(worldPos.x,transform.position.y), 1);
             // ワールド座標をPlayer位置へ変換
             //transform.position = worldPos;
 
             switch (playerLevel)
             {
                 case PLAYER_LEVEL.FIRST:
-                    sideMovingSpeed = 2.0f;
+                    sideMovingSpeed = 5.0f;
+                    speedLimit = 10.0f;
                     break;
                 case PLAYER_LEVEL.SECOND:
                     break;
