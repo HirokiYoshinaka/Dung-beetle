@@ -53,7 +53,7 @@ namespace Hunkoro
                 rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
                 if (transform.position.y < -15)
                 {
-                    transform.position = new Vector3(0, 25, 0);
+                    transform.position = new Vector3(0, transform.position.y+40, 0);
                 }
             }
 
