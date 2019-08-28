@@ -2,19 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace Hunkoro
 {
-
-    /// <summary>
-    /// 背景を動かすことでPlayerのy軸を移動させずに移動しているかのように見せかけます。
-    /// </summary>
-    public class PlayGroundController : MonoBehaviour
+    public class GoalController : MonoBehaviour
     {
         [SerializeField]
         private GameObject player;
         private PlayerController playerController;
-        //
         private new Rigidbody2D rigidbody;
         // Start is called before the first frame update
         void Start()
@@ -42,6 +36,7 @@ namespace Hunkoro
                     break;
             }
         }
+
         //GAMEMODE.STAY_STARTで呼び出される
         void StayStart()
         {
@@ -52,9 +47,10 @@ namespace Hunkoro
         void Play()
         {
             rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
+            //画面外
             if (transform.position.y < -15)
             {
-                transform.position = new Vector3(0, transform.position.y + 40, 0);
+                //transform.position = new Vector3(0, transform.position.y + 40, 0);
             }
         }
 

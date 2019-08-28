@@ -42,12 +42,9 @@ namespace Hunkoro
         //横移動の速度
         [SerializeField]
         private float sideMovingSpeed;
-        //横移動の速度制限
-        [SerializeField]
-        private float speedLimit;
         /*スプライトの幅を取得する
         * マウスカーソルがスプライトの幅の範囲にあれば移動させない
-        * そうすることでまっすぐ進みたいときのブレをなくす
+        * そうすることでまっすぐ進みたいときのブレをなくす？
         */
         private float spriteWidth;
 
@@ -139,7 +136,6 @@ namespace Hunkoro
             {
                 case PLAYER_LEVEL.FIRST:
                     sideMovingSpeed = 5.0f;
-                    speedLimit = 10.0f;
                     break;
                 case PLAYER_LEVEL.SECOND:
                     break;
