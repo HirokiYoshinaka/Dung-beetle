@@ -124,7 +124,9 @@ namespace Hunkoro
             //マウスが真ん中（？
             else
             {
-                rigidbody.velocity = new Vector2(0, 0);
+                rigidbody.AddForce(-rigidbody.velocity);
+
+                //rigidbody.velocity = new Vector2(0, 0);
             }
 
             //これは結局rigidbody使っていないせいで当たり判定が怪しくなるので却下
