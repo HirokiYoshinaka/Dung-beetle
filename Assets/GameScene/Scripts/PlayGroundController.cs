@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Hunkoro
 {
-
     /// <summary>
-    /// 背景を動かすことでPlayerのy軸を移動させずに移動しているかのように見せかけます。
+    /// 背景（その他のオブジェクトも）を動かすことで
+    /// Playerのy軸を移動させずに縦移動しているかのように見せかけます。
     /// </summary>
     public class PlayGroundController : MonoBehaviour
     {

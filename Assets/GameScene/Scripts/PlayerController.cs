@@ -5,15 +5,18 @@ using UnityEngine;
 
 namespace Hunkoro
 {
-    //Playerの状態=ゲーム全体の状態
+    //Playerの状態=ゲーム全体の状態と考えます
     public enum GAMEMODE
     {
-        STAY_START, PLAY, GAMEOVER, CLEAR,
+        STAY_START, //スタート前
+        PLAY,
+        GAMEOVER,
+        CLEAR,
     }
     //Playerの大きさの段階
     public enum PLAYER_LEVEL
     {
-        FIRST, SECOND, THIRD,
+        FIRST, SECOND, THIRD, FORTH, FIFTH,
     }
     /// <summary>
     /// "Player"の挙動を記述します。
@@ -57,6 +60,14 @@ namespace Hunkoro
             return GameSpeed;
         }
 
+        //集めたうんこの数
+        [SerializeField]
+        private int UnkoScore = 0;
+        public int GetUnkoScore()
+        {
+            return UnkoScore;
+        }
+
 
         // Start is called before the first frame update
         void Start()
@@ -93,6 +104,7 @@ namespace Hunkoro
         }
 
         //GAMEMODE.STAY_STARTで呼び出される
+        //スタート前の状態
         void StayStart()
         {
 
