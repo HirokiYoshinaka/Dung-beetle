@@ -49,9 +49,10 @@ namespace Hunkoro
         {
             rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
             //画面外
-            if (transform.position.y < -15)
+            if (transform.position.y < -6)
             {
-                //transform.position = new Vector3(0, transform.position.y + 40, 0);
+                //オブジェクトのDestroy
+                Destroy(gameObject);
             }
         }
 
