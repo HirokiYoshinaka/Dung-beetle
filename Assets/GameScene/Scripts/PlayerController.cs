@@ -109,15 +109,16 @@ namespace Hunkoro
         private void StayStart()
         {
             //クリックするとPLAYに遷移
+            //OnMouseに記述。。。設計ミス？
         }
 
+        //ここからポップアップ処理
         private void OnMouseOver()
         {
-            //ポップアップ？
             switch (GameMode)
             {
                 case GAMEMODE.STAY_START:
-                    transform.localScale = new Vector3(1.5f, 1.5f, 1);  
+                    transform.localScale = new Vector3(1.5f, 1.5f, 1);
                     break;
                 default:
                     break;
@@ -199,6 +200,31 @@ namespace Hunkoro
                     break;
             }
         }
+        //当たり判定の処理部分
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            switch(collision.tag)
+            {
+                //うんこに当たったときの処理
+                case "Unko":
+                    //スコア加算
+                    UnkoScore++;
+                    //うんこを消す
+                    Destroy(collision.gameObject);
+                    break;
+                //石に当たったときの処理
+                case "Stone":
+                    break;
+                //サボテンに当たったときの処理
+                case "Cactus":
+                    break;
+                //ゴールしたとき？の処理
+                case "Goal":
+                    break;
+                default:
+                    break;
+            }
+        }
 
         //GAMEMODE.GAMEOVERで呼び出される
         private void GameOver()
@@ -211,5 +237,7 @@ namespace Hunkoro
         {
 
         }
+
+
     }
 }

@@ -7,7 +7,7 @@ namespace Hunkoro
     public class CactusController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject player;
+        private GameObject player = null;
         private PlayerController playerController;
         private new Rigidbody2D rigidbody;
         // Start is called before the first frame update
