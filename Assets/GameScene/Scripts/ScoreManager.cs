@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace Hunkoro
 {
+    /// <summary>
+    /// スコアの表示を行います
+    /// </summary>
     public class ScoreManager : MonoBehaviour
     {
         [SerializeField]

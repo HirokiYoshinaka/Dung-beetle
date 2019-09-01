@@ -4,12 +4,11 @@ using UnityEngine;
 
 namespace Hunkoro
 {
-    public class UnkoGenarator : MonoBehaviour
+    public class GoalGenarator : MonoBehaviour
     {
-        //UnkoController型とする
-        //UnkoControllerコンポーネントを持たないprefabが入れられないようになる
+        //StoneControllerコンポーネントを持たないprefabが入れられないようになる
         [SerializeField]
-        private UnkoController unkoPrefab = null;
+        private GoalController goalPrefab = null;
         [SerializeField]
         private GameObject player = null;
         private PlayerController playerController;
@@ -20,7 +19,6 @@ namespace Hunkoro
         //間隔管理用変数
         [SerializeField]
         private float delta = 0;
-
         // Start is called before the first frame update
         void Start()
         {
@@ -56,14 +54,13 @@ namespace Hunkoro
                 }
             }
         }
-
-        //新しいうんこを生成する部分
+        //新しい巣穴を生成する部分
         private void Genarate()
         {
-            //PrefabからGameObjectを生成
-            UnkoController genarate = Instantiate(unkoPrefab);
-            genarate.transform.position = new Vector3(0, 5, 0);
-            //新しいうんこにPlayerとPlay
+            //Prefabからインスタンスを生成
+            GoalController genarate = Instantiate(goalPrefab);
+            genarate.transform.position = new Vector3(-3, 5, 0);
+            //新しいインスタンスにPlayerとPlayerControllerをセット
             genarate.player = player;
             genarate.playerController = playerController;
         }

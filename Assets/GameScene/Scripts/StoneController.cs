@@ -9,14 +9,14 @@ namespace Hunkoro
     /// </summary>
     public class StoneController : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject player = null;
-        private PlayerController playerController;
+        //Genaratorからセットするのでpublicに
+        public GameObject player = null;
+        public PlayerController playerController = null;
         private new Rigidbody2D rigidbody;
         // Start is called before the first frame update
         void Start()
         {
-            playerController = player.GetComponent<PlayerController>();
+            //playerController = player.GetComponent<PlayerController>();
             this.rigidbody = GetComponent<Rigidbody2D>();
         }
 
