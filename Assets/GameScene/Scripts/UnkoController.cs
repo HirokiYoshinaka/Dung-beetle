@@ -6,14 +6,16 @@ namespace Hunkoro
 {
     public class UnkoController : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject player = null;
-        private PlayerController playerController;
+        //Genaratorからセットするのでpublicに
+        public GameObject player = null;
+        public PlayerController playerController = null;
         private new Rigidbody2D rigidbody;
         // Start is called before the first frame update
         void Start()
         {
-            playerController = player.GetComponent<PlayerController>();
+            //Genaratorからセットするので不要（この設計まずいか？
+            //player = GameObject.Find("Player");
+            //playerController = player.GetComponent<PlayerController>();
             this.rigidbody = GetComponent<Rigidbody2D>();
         }
 
