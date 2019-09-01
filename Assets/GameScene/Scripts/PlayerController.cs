@@ -50,6 +50,8 @@ namespace Hunkoro
         * そうすることでまっすぐ進みたいときのブレをなくす？
         */
         private float spriteWidth;
+        //マウスとの判定に使用
+        private Collider2D collider2d;
 
         //全体の速度を指定?
         [SerializeField]
@@ -75,7 +77,8 @@ namespace Hunkoro
             //Rigidbody2dコンポーネントを取得
             this.rigidbody = GetComponent<Rigidbody2D>();
             //状態、大きさをセット
-            GameMode = GAMEMODE.PLAY;
+            GameMode = GAMEMODE.STAY_START;
+            GameSpeed = 0;
             playerLevel = PLAYER_LEVEL.FIRST;
             //スプライトの幅を取得
             spriteWidth = GetComponent<SpriteRenderer>().bounds.size.x;
@@ -84,8 +87,6 @@ namespace Hunkoro
         // Update is called once per frame
         void Update()
         {
-
-
             switch (GameMode)
             {
                 case GAMEMODE.STAY_START:
@@ -105,13 +106,50 @@ namespace Hunkoro
 
         //GAMEMODE.STAY_STARTで呼び出される
         //スタート前の状態
-        void StayStart()
+        private void StayStart()
         {
-
+            //クリックするとPLAYに遷移
         }
 
+        private void OnMouseOver()
+        {
+            //ポップアップ？
+            switch (GameMode)
+            {
+                case GAMEMODE.STAY_START:
+                    transform.localScale = new Vector3(1.5f, 1.5f, 1);  
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void OnMouseExit()
+        {
+            switch (GameMode)
+            {
+                case GAMEMODE.STAY_START:
+                    transform.localScale = new Vector3(1, 1, 1);
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void OnMouseDown()
+        {
+            switch (GameMode)
+            {
+                case GAMEMODE.STAY_START:
+                    transform.localScale = new Vector3(1, 1, 1);
+                    GameMode = GAMEMODE.PLAY;
+                    break;
+                default:
+                    break;
+            }
+        }
+        //ここまでポップアップのための処理
+
         //GAMEMODE.PLAYで呼び出される
-        void Play()
+        private void Play()
         {
             //このへんはちょいパクり
             //マウス位置座標をVector2で取得
@@ -144,33 +182,34 @@ namespace Hunkoro
             // ワールド座標をPlayer位置へ変換
             //transform.position = worldPos;
 
+            //レベルに応じて設定していく部分
             switch (playerLevel)
             {
                 case PLAYER_LEVEL.FIRST:
                     sideMovingSpeed = 5.0f;
+                    GameSpeed = -2.0f;
                     break;
                 case PLAYER_LEVEL.SECOND:
                     break;
                 case PLAYER_LEVEL.THIRD:
                     break;
+                case PLAYER_LEVEL.FORTH:
+                    break;
+                case PLAYER_LEVEL.FIFTH:
+                    break;
             }
         }
 
         //GAMEMODE.GAMEOVERで呼び出される
-        void GameOver()
+        private void GameOver()
         {
 
         }
 
         //GAMEMODE.CLEARで呼び出される
-        void Clear()
+        private void Clear()
         {
 
-        }
-
-        public static explicit operator PlayerController(GameObject v)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Hunkoro
         // Update is called once per frame
         void Update()
         {
+            //プレイヤーの状態に応じて変化
             switch (playerController.GetGameMode())
             {
                 case GAMEMODE.STAY_START:

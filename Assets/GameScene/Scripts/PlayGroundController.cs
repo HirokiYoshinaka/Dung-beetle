@@ -12,7 +12,7 @@ namespace Hunkoro
     public class PlayGroundController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject player;
+        private GameObject player = null;
         private PlayerController playerController;
         //
         private new Rigidbody2D rigidbody;
@@ -26,6 +26,7 @@ namespace Hunkoro
         // Update is called once per frame
         void Update()
         {
+            //プレイヤーの状態に応じて変化
             switch (playerController.GetGameMode())
             {
                 case GAMEMODE.STAY_START:
