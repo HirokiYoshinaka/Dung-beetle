@@ -51,7 +51,9 @@ namespace Hunkoro
         */
         private float spriteWidth;
         //マウスとの判定に使用
-        private Collider2D collider2d;
+        private Collider2D collider2d = null;
+        //SE
+        private AudioSource sound = null;
 
         //全体の速度を指定?
         [SerializeField]
@@ -75,6 +77,8 @@ namespace Hunkoro
         {
             //Rigidbody2dコンポーネントを取得
             this.rigidbody = GetComponent<Rigidbody2D>();
+            //
+            sound = GetComponent<AudioSource>();
             //状態、大きさをセット
             GameMode = GAMEMODE.STAY_START;
             GameSpeed = 0;
@@ -140,6 +144,7 @@ namespace Hunkoro
             {
                 case GAMEMODE.STAY_START:
                     transform.localScale = new Vector3(1, 1, 1);
+                    sound.Play();
                     GameMode = GAMEMODE.PLAY;
                     break;
                 default:
