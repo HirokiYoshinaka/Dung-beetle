@@ -72,6 +72,14 @@ namespace Hunkoro
             return UnkoScore;
         }
 
+        private Animator animator = null;
+
+        public AnimationClip walk1 = null;
+        public AnimationClip walk2 = null;
+        public AnimationClip walk3 = null;
+        public AnimationClip walk4 = null;
+        public AnimationClip walk5 = null;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -85,6 +93,8 @@ namespace Hunkoro
             playerLevel = PLAYER_LEVEL.FIRST;
             //スプライトの幅を取得
             spriteWidth = GetComponent<SpriteRenderer>().bounds.size.x;
+            //
+            animator = GetComponent<Animator>();
         }
 
         // Update is called once per frame
@@ -111,6 +121,7 @@ namespace Hunkoro
         //スタート前の状態
         private void StayStart()
         {
+            this.animator.speed = 0;
             //クリックするとPLAYに遷移
             //OnMouseに記述。。。設計ミス？
         }
@@ -145,6 +156,7 @@ namespace Hunkoro
                 case GAMEMODE.STAY_START:
                     transform.localScale = new Vector3(1, 1, 1);
                     sound.Play();
+                    this.animator.speed = 1;
                     GameMode = GAMEMODE.PLAY;
                     break;
                 default:
@@ -193,21 +205,71 @@ namespace Hunkoro
                 case PLAYER_LEVEL.FIRST:
                     sideMovingSpeed = 5.0f;
                     GameSpeed = -2.0f;
+                    if (UnkoScore < 0)
+                    {
+                        GameMode = GAMEMODE.GAMEOVER;
+                        //Gameoverのanimation
+                    }
+                    else if (UnkoScore >= 2)
+                    {
+                        this.animator.SetTrigger("Lv2");
+                        playerLevel = PLAYER_LEVEL.SECOND;
+                    }
                     break;
                 case PLAYER_LEVEL.SECOND:
+                    GameSpeed = -2.5f;
+                    if (UnkoScore < 2)
+                    {
+                        this.animator.SetTrigger("Lv1");
+                        playerLevel = PLAYER_LEVEL.FIRST;
+                    }
+                    else if (UnkoScore >= 4)
+                    {
+                        this.animator.SetTrigger("Lv3");
+                        playerLevel = PLAYER_LEVEL.THIRD;
+                    }
                     break;
+
                 case PLAYER_LEVEL.THIRD:
+                    GameSpeed = -3.0f;
+                    if (UnkoScore < 4)
+                    {
+                        this.animator.SetTrigger("Lv2");
+                        playerLevel = PLAYER_LEVEL.SECOND;
+                    }
+                    else if (UnkoScore >= 6)
+                    {
+                        this.animator.SetTrigger("Lv4");
+                        playerLevel = PLAYER_LEVEL.FORTH;
+                    }
                     break;
                 case PLAYER_LEVEL.FORTH:
+                    GameSpeed = -3.5f;
+                    if (UnkoScore < 6)
+                    {
+                        this.animator.SetTrigger("Lv3");
+                        playerLevel = PLAYER_LEVEL.THIRD;
+                    }
+                    else if (UnkoScore >= 8)
+                    {
+                        this.animator.SetTrigger("Lv5");
+                        playerLevel = PLAYER_LEVEL.FIFTH;
+                    }
                     break;
                 case PLAYER_LEVEL.FIFTH:
+                    GameSpeed = -4.0f;
+                    if (UnkoScore < 8)
+                    {
+                        this.animator.SetTrigger("Lv4");
+                        playerLevel = PLAYER_LEVEL.FORTH;
+                    }
                     break;
             }
         }
         //当たり判定の処理部分
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            switch(collision.tag)
+            switch (collision.tag)
             {
                 //うんこに当たったときの処理
                 case "Unko":

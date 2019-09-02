@@ -234,6 +234,11 @@ MonoBehaviour:
   sideMovingSpeed: 0
   GameSpeed: -2
   UnkoScore: 0
+  walk1: {fileID: 7400000, guid: 66ab4afbe4c37d04896faceddabba22d, type: 2}
+  walk2: {fileID: 7400000, guid: 28c3066b1b02b2442a11b6f6a8d7944f, type: 2}
+  walk3: {fileID: 7400000, guid: b32b1b8a302e1694c9b8d498df594081, type: 2}
+  walk4: {fileID: 7400000, guid: 801a40ba5cd0eac40bf02cd92e01e085, type: 2}
+  walk5: {fileID: 7400000, guid: 89a60a2073ca9a74c95a3302abbd4ac5, type: 2}
 --- !u!61 &40631865
 BoxCollider2D:
   m_ObjectHideFlags: 0
