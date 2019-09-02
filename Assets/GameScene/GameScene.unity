@@ -124,9 +124,9 @@ GameObject:
   - component: {fileID: 40631861}
   - component: {fileID: 40631863}
   - component: {fileID: 40631864}
-  - component: {fileID: 40631865}
   - component: {fileID: 40631866}
   - component: {fileID: 40631867}
+  - component: {fileID: 40631865}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -239,8 +239,8 @@ MonoBehaviour:
   walk3: {fileID: 7400000, guid: b32b1b8a302e1694c9b8d498df594081, type: 2}
   walk4: {fileID: 7400000, guid: 801a40ba5cd0eac40bf02cd92e01e085, type: 2}
   walk5: {fileID: 7400000, guid: 89a60a2073ca9a74c95a3302abbd4ac5, type: 2}
---- !u!61 &40631865
-BoxCollider2D:
+--- !u!58 &40631865
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -252,19 +252,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
-    newSize: {x: 0.54, y: 1.08}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0.25}
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.25
 --- !u!82 &40631866
 AudioSource:
   m_ObjectHideFlags: 0

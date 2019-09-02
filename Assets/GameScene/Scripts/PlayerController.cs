@@ -50,8 +50,8 @@ namespace Hunkoro
         * そうすることでまっすぐ進みたいときのブレをなくす？
         */
         private float spriteWidth;
-        //マウスとの判定に使用
-        private Collider2D collider2d = null;
+        //当たり判定の大きさ変更
+        private CircleCollider2D collider2d = null;
         //SE
         private AudioSource sound = null;
 
@@ -93,6 +93,8 @@ namespace Hunkoro
             playerLevel = PLAYER_LEVEL.FIRST;
             //スプライトの幅を取得
             spriteWidth = GetComponent<SpriteRenderer>().bounds.size.x;
+            //
+            collider2d = GetComponent<CircleCollider2D>();
             //
             animator = GetComponent<Animator>();
         }
@@ -200,6 +202,7 @@ namespace Hunkoro
             //transform.position = worldPos;
 
             //レベルに応じて設定していく部分
+            //関数分けるべきか？
             switch (playerLevel)
             {
                 case PLAYER_LEVEL.FIRST:
@@ -212,21 +215,18 @@ namespace Hunkoro
                     }
                     else if (UnkoScore >= 2)
                     {
-                        this.animator.SetTrigger("Lv2");
-                        playerLevel = PLAYER_LEVEL.SECOND;
+                        ChangeLv2();
                     }
                     break;
                 case PLAYER_LEVEL.SECOND:
                     GameSpeed = -2.5f;
                     if (UnkoScore < 2)
                     {
-                        this.animator.SetTrigger("Lv1");
-                        playerLevel = PLAYER_LEVEL.FIRST;
+                        ChangeLv1();
                     }
                     else if (UnkoScore >= 4)
                     {
-                        this.animator.SetTrigger("Lv3");
-                        playerLevel = PLAYER_LEVEL.THIRD;
+                        ChangeLv3();
                     }
                     break;
 
@@ -234,38 +234,69 @@ namespace Hunkoro
                     GameSpeed = -3.0f;
                     if (UnkoScore < 4)
                     {
-                        this.animator.SetTrigger("Lv2");
-                        playerLevel = PLAYER_LEVEL.SECOND;
+                        ChangeLv2();
                     }
                     else if (UnkoScore >= 6)
                     {
-                        this.animator.SetTrigger("Lv4");
-                        playerLevel = PLAYER_LEVEL.FORTH;
+                        ChangeLv4();
                     }
                     break;
                 case PLAYER_LEVEL.FORTH:
                     GameSpeed = -3.5f;
                     if (UnkoScore < 6)
                     {
-                        this.animator.SetTrigger("Lv3");
-                        playerLevel = PLAYER_LEVEL.THIRD;
+                        ChangeLv3();
                     }
                     else if (UnkoScore >= 8)
                     {
-                        this.animator.SetTrigger("Lv5");
-                        playerLevel = PLAYER_LEVEL.FIFTH;
+                        ChangeLv5();
                     }
                     break;
                 case PLAYER_LEVEL.FIFTH:
                     GameSpeed = -4.0f;
                     if (UnkoScore < 8)
                     {
-                        this.animator.SetTrigger("Lv4");
-                        playerLevel = PLAYER_LEVEL.FORTH;
+                        ChangeLv4();
                     }
                     break;
             }
         }
+
+        private void ChangeLv1()
+        {
+            this.animator.SetTrigger("Lv1");
+            collider2d.radius = 0.25f;
+            playerLevel = PLAYER_LEVEL.FIRST;
+        }
+
+        private void ChangeLv2()
+        {
+            this.animator.SetTrigger("Lv2");
+            collider2d.radius = 0.3f;
+            playerLevel = PLAYER_LEVEL.SECOND;
+        }
+
+        private void ChangeLv3()
+        {
+            this.animator.SetTrigger("Lv3");
+            collider2d.radius = 0.375f;
+            playerLevel = PLAYER_LEVEL.THIRD;
+        }
+
+        private void ChangeLv4()
+        {
+            this.animator.SetTrigger("Lv4");
+            collider2d.radius = 0.42f;
+            playerLevel = PLAYER_LEVEL.FORTH;
+        }
+
+        private void ChangeLv5()
+        {
+            this.animator.SetTrigger("Lv5");
+            collider2d.radius = 0.5f;
+            playerLevel = PLAYER_LEVEL.FIFTH;
+        }
+
         //当たり判定の処理部分
         private void OnTriggerEnter2D(Collider2D collision)
         {
