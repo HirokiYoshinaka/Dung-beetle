@@ -70,7 +70,6 @@ namespace Hunkoro
             return UnkoScore;
         }
 
-
         // Start is called before the first frame update
         void Start()
         {
@@ -209,14 +208,14 @@ namespace Hunkoro
                 case "Unko":
                     //スコア加算
                     UnkoScore++;
-                    //うんこを消す
-                    Destroy(collision.gameObject);
                     break;
                 //石に当たったときの処理
                 case "Stone":
+                    //ペナルティ
                     break;
                 //サボテンに当たったときの処理
                 case "Cactus":
+                    //ペナルティ
                     break;
                 //ゴールしたとき？の処理
                 case "Goal":

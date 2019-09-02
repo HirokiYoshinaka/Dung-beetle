@@ -10,6 +10,12 @@ namespace Hunkoro
         public GameObject player = null;
         public PlayerController playerController = null;
         private new Rigidbody2D rigidbody;
+
+        //SE
+        public AudioClip Sound = null;
+        AudioSource audioSource = null;
+        private SpriteRenderer spriteRenderer = null;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -17,6 +23,8 @@ namespace Hunkoro
             //player = GameObject.Find("Player");
             //playerController = player.GetComponent<PlayerController>();
             this.rigidbody = GetComponent<Rigidbody2D>();
+            audioSource = gameObject.GetComponent<AudioSource>();
+            spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         }
 
         // Update is called once per frame
@@ -55,6 +63,22 @@ namespace Hunkoro
             {
                 //オブジェクトのDestroy
                 Destroy(gameObject);
+            }
+        }
+
+        //当たり判定の処理部分
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == "Player")
+            {
+                //SEを鳴らす
+                audioSource.PlayOneShot(Sound);
+
+                //ここでDestroyすると音まで消えてしまうので
+                //Destroy(gameObject);
+                //spriteを非表示にして対応
+                //画面外に出た際にお片付けするのでこれでおｋ
+                spriteRenderer.enabled = false;
             }
         }
 

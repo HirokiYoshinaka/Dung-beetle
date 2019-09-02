@@ -24,7 +24,7 @@ namespace Hunkoro
         // Update is called once per frame
         void Update()
         {
-            text.text = "集めたうんこ：" + playerController.GetUnkoScore();
+            text.text = "あつめたうんこ：" + playerController.GetUnkoScore();
         }
     }
 }
