@@ -71,13 +71,14 @@ namespace Hunkoro
             {
                 MainSpriteRenderer.sprite = BrokenSprite;
                 audioSource.PlayOneShot(hitSound);
+                GetComponent<BoxCollider2D>().enabled = false;
             }
         }
 
         //GAMEMODE.GAMEOVERで呼び出される
         void GameOver()
         {
-
+            rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
         }
 
         //GAMEMODE.CLEARで呼び出される

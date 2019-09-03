@@ -62,7 +62,7 @@ namespace Hunkoro
         //GAMEMODE.GAMEOVERで呼び出される
         void GameOver()
         {
-
+            rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
         }
 
         //GAMEMODE.CLEARで呼び出される

@@ -36,16 +36,16 @@ namespace Hunkoro
                 //レベルデザイン？
                 switch (playerController.GetPlayerLevel())
                 {
-                    case PLAYER_LEVEL.FIRST:
+                    case PLAYER_LEVEL.Lv1:
                         span = 2;
                         break;
-                    case PLAYER_LEVEL.SECOND:
+                    case PLAYER_LEVEL.Lv2:
                         break;
-                    case PLAYER_LEVEL.THIRD:
+                    case PLAYER_LEVEL.Lv3:
                         break;
-                    case PLAYER_LEVEL.FORTH:
+                    case PLAYER_LEVEL.Lv4:
                         break;
-                    case PLAYER_LEVEL.FIFTH:
+                    case PLAYER_LEVEL.Lv5:
                         break;
                 }
                 this.delta += Time.deltaTime;

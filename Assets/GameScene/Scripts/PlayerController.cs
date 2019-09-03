@@ -16,7 +16,8 @@ namespace Hunkoro
     //Playerの大きさの段階
     public enum PLAYER_LEVEL
     {
-        FIRST, SECOND, THIRD, FORTH, FIFTH,
+        Lv1 = 1,
+        Lv2, Lv3, Lv4, Lv5,
     }
     /// <summary>
     /// "Player"の挙動を記述します。
@@ -74,12 +75,6 @@ namespace Hunkoro
 
         private Animator animator = null;
 
-        public AnimationClip walk1 = null;
-        public AnimationClip walk2 = null;
-        public AnimationClip walk3 = null;
-        public AnimationClip walk4 = null;
-        public AnimationClip walk5 = null;
-
         // Start is called before the first frame update
         void Start()
         {
@@ -90,13 +85,17 @@ namespace Hunkoro
             //状態、大きさをセット
             GameMode = GAMEMODE.STAY_START;
             GameSpeed = 0;
-            playerLevel = PLAYER_LEVEL.FIRST;
+            playerLevel = PLAYER_LEVEL.Lv1;
+
             //スプライトの幅を取得
             spriteWidth = GetComponent<SpriteRenderer>().bounds.size.x;
             //
             collider2d = GetComponent<CircleCollider2D>();
             //
             animator = GetComponent<Animator>();
+
+            this.animator.SetInteger("Level", 1);
+            this.animator.speed = 0;
         }
 
         // Update is called once per frame
@@ -205,54 +204,54 @@ namespace Hunkoro
             //関数分けるべきか？
             switch (playerLevel)
             {
-                case PLAYER_LEVEL.FIRST:
+                case PLAYER_LEVEL.Lv1:
                     sideMovingSpeed = 5.0f;
                     GameSpeed = -2.0f;
                     if (UnkoScore < 0)
                     {
-                        GameMode = GAMEMODE.GAMEOVER;
+                        ChangeGameOver();
                         //Gameoverのanimation
                     }
-                    else if (UnkoScore >= 2)
+                    else if (2 <= UnkoScore)
                     {
                         ChangeLv2();
                     }
                     break;
-                case PLAYER_LEVEL.SECOND:
+                case PLAYER_LEVEL.Lv2:
                     GameSpeed = -2.5f;
                     if (UnkoScore < 2)
                     {
                         ChangeLv1();
                     }
-                    else if (UnkoScore >= 4)
+                    else if (4 <= UnkoScore)
                     {
                         ChangeLv3();
                     }
                     break;
 
-                case PLAYER_LEVEL.THIRD:
+                case PLAYER_LEVEL.Lv3:
                     GameSpeed = -3.0f;
                     if (UnkoScore < 4)
                     {
                         ChangeLv2();
                     }
-                    else if (UnkoScore >= 6)
+                    else if (6 <= UnkoScore)
                     {
                         ChangeLv4();
                     }
                     break;
-                case PLAYER_LEVEL.FORTH:
+                case PLAYER_LEVEL.Lv4:
                     GameSpeed = -3.5f;
                     if (UnkoScore < 6)
                     {
                         ChangeLv3();
                     }
-                    else if (UnkoScore >= 8)
+                    else if (8 <= UnkoScore)
                     {
                         ChangeLv5();
                     }
                     break;
-                case PLAYER_LEVEL.FIFTH:
+                case PLAYER_LEVEL.Lv5:
                     GameSpeed = -4.0f;
                     if (UnkoScore < 8)
                     {
@@ -262,39 +261,48 @@ namespace Hunkoro
             }
         }
 
+        private void ChangeGameOver()
+        {
+            this.animator.SetInteger("Level", 0);
+            GameSpeed = 0;
+            rigidbody.velocity = new Vector2(0, 0);
+            sound.Stop();
+            GameMode = GAMEMODE.GAMEOVER;
+        }
+
         private void ChangeLv1()
         {
-            this.animator.SetTrigger("Lv1");
+            this.animator.SetInteger("Level", 1);
             collider2d.radius = 0.25f;
-            playerLevel = PLAYER_LEVEL.FIRST;
+            playerLevel = PLAYER_LEVEL.Lv1;
         }
 
         private void ChangeLv2()
         {
-            this.animator.SetTrigger("Lv2");
+            this.animator.SetInteger("Level", 2);
             collider2d.radius = 0.3f;
-            playerLevel = PLAYER_LEVEL.SECOND;
+            playerLevel = PLAYER_LEVEL.Lv2;
         }
 
         private void ChangeLv3()
         {
-            this.animator.SetTrigger("Lv3");
+            this.animator.SetInteger("Level", 3);
             collider2d.radius = 0.375f;
-            playerLevel = PLAYER_LEVEL.THIRD;
+            playerLevel = PLAYER_LEVEL.Lv3;
         }
 
         private void ChangeLv4()
         {
-            this.animator.SetTrigger("Lv4");
+            this.animator.SetInteger("Level", 4);
             collider2d.radius = 0.42f;
-            playerLevel = PLAYER_LEVEL.FORTH;
+            playerLevel = PLAYER_LEVEL.Lv4;
         }
 
         private void ChangeLv5()
         {
-            this.animator.SetTrigger("Lv5");
+            this.animator.SetInteger("Level", 5);
             collider2d.radius = 0.5f;
-            playerLevel = PLAYER_LEVEL.FIFTH;
+            playerLevel = PLAYER_LEVEL.Lv5;
         }
 
         //当たり判定の処理部分
@@ -310,10 +318,12 @@ namespace Hunkoro
                 //石に当たったときの処理
                 case "Stone":
                     //ペナルティ
+                    UnkoScore -= 5;
                     break;
                 //サボテンに当たったときの処理
                 case "Cactus":
                     //ペナルティ
+                    UnkoScore -= 2;
                     break;
                 //ゴールしたとき？の処理
                 case "Goal":

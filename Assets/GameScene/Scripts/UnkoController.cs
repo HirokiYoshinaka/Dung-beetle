@@ -79,13 +79,14 @@ namespace Hunkoro
                 //spriteを非表示にして対応
                 //画面外に出た際にお片付けするのでこれでおｋ
                 spriteRenderer.enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
             }
         }
 
         //GAMEMODE.GAMEOVERで呼び出される
         void GameOver()
         {
-
+            rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
         }
 
         //GAMEMODE.CLEARで呼び出される
