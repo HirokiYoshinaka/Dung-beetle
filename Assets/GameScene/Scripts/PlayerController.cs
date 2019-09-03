@@ -72,8 +72,11 @@ namespace Hunkoro
         {
             return UnkoScore;
         }
-
+        //アニメーション
         private Animator animator = null;
+        //BGM
+        [SerializeField]
+        private BGMManager BGM = null;
 
         // Start is called before the first frame update
         void Start()
@@ -96,6 +99,7 @@ namespace Hunkoro
 
             this.animator.SetInteger("Level", 1);
             this.animator.speed = 0;
+
         }
 
         // Update is called once per frame
@@ -158,6 +162,7 @@ namespace Hunkoro
                     transform.localScale = new Vector3(1, 1, 1);
                     sound.Play();
                     this.animator.speed = 1;
+                    BGM.StartPlayBGM();
                     GameMode = GAMEMODE.PLAY;
                     break;
                 default:
