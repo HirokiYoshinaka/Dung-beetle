@@ -162,6 +162,8 @@ namespace Hunkoro
                     transform.localScale = new Vector3(1, 1, 1);
                     sound.Play();
                     this.animator.speed = 1;
+                    var child = transform.Find("ClickHere").gameObject;
+                    child.SetActive(false);
                     BGM.StartPlayBGM();
                     GameMode = GAMEMODE.PLAY;
                     break;
