@@ -23,5 +23,15 @@ namespace Hunkoro {
         {
             SceneManager.LoadScene("GameScene");
         }
+
+        private void OnMouseEnter()
+        {
+            transform.localScale = new Vector3(1.2f, 1.2f, 1);
+        }
+
+        private void OnMouseExit()
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 }
