@@ -20,6 +20,10 @@ namespace Hunkoro
         }
 
         //新しい石を生成する部分
+        public void Genarate(float x, float y)
+        {
+            Genarate(new Vector3(x, y, 0));
+        }
         public void Genarate(Vector3 pos)
         {
             //Prefabからインスタンスを生成
