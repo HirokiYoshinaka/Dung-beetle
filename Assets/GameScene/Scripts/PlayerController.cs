@@ -67,11 +67,19 @@ namespace Hunkoro
 
         //集めたうんこの数
         [SerializeField]
-        private int UnkoScore = 0;
-        public int GetUnkoScore()
+        private static int UnkoScore = 0;
+        public static int GetUnkoScore()
         {
             return UnkoScore;
         }
+        //時間
+        [SerializeField]
+        private static float timeScore = 0;
+        public static float GetTimeScore()
+        {
+            return timeScore;
+        }
+
         //アニメーション
         private Animator animator = null;
         //BGM
@@ -180,6 +188,9 @@ namespace Hunkoro
         //GAMEMODE.PLAYで呼び出される
         private void Play()
         {
+            //timeScoreを数える
+            timeScore += Time.deltaTime;
+
             //このへんはちょいパクり
             //マウス位置座標をVector2で取得
             Vector2 pos = Input.mousePosition;
