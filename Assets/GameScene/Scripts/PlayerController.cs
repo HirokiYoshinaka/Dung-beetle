@@ -396,7 +396,7 @@ namespace Hunkoro
         {
             clear.SetActive(true);
             HighScoreManager.AddScore(new Score(UnkoScore, timeScore));
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
             SceneManager.LoadScene("ClearScene");
         }
 

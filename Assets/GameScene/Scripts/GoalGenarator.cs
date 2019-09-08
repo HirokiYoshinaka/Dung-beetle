@@ -6,7 +6,7 @@ namespace Hunkoro
 {
     public class GoalGenarator : MonoBehaviour
     {
-        //StoneControllerコンポーネントを持たないprefabが入れられないようになる
+        //GoalControllerコンポーネントを持たないprefabが入れられないようになる
         [SerializeField]
         private GoalController goalPrefab = null;
         [SerializeField]
