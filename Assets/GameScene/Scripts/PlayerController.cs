@@ -78,6 +78,10 @@ namespace Hunkoro
         [SerializeField]
         private BGMManager BGM = null;
 
+        //ゲームオーバー演出
+        [SerializeField]
+        private GameObject gameOver = null;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -272,8 +276,8 @@ namespace Hunkoro
         {
             this.animator.SetInteger("Level", 0);
             GameSpeed = 0;
-            rigidbody.velocity = new Vector2(0, 0);
             sound.Stop();
+            gameOver.SetActive(true);
             GameMode = GAMEMODE.GAMEOVER;
         }
 
@@ -343,7 +347,7 @@ namespace Hunkoro
         //GAMEMODE.GAMEOVERで呼び出される
         private void GameOver()
         {
-
+            rigidbody.velocity = new Vector2(0, 0);
         }
 
         //GAMEMODE.CLEARで呼び出される
