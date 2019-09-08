@@ -19,7 +19,7 @@ namespace Hunkoro {
         //クリックしたとき
         private void OnMouseDown()
         {
-            StartCoroutine(LoadPlayScene());
+            StartCoroutine(LoadGameScene());
         }
 
         private void OnMouseEnter()
@@ -32,7 +32,7 @@ namespace Hunkoro {
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        private IEnumerator LoadPlayScene()
+        private IEnumerator LoadGameScene()
         {
             transform.localScale = new Vector3(1, 1, 1);
             audioSource.PlayOneShot(sound);

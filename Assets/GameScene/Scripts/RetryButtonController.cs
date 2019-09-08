@@ -10,6 +10,16 @@ namespace Hunkoro
     /// </summary>
     public class RetryButtonController : MonoBehaviour
     {
+        [SerializeField]
+        private AudioSource audioSource = null;
+        [SerializeField]
+        private AudioClip sound = null;
+
+        private void Start()
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
         private void OnMouseEnter()
         {
             transform.localScale = new Vector3(1.2f, 1.2f, 1);
@@ -20,8 +30,16 @@ namespace Hunkoro
         }
         private void OnMouseDown()
         {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            StartCoroutine(LoadGameScene());
+        }
+
+        private IEnumerator LoadGameScene()
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            audioSource.PlayOneShot(sound);
+            yield return new WaitForSeconds(1);
             SceneManager.LoadScene("GameScene");
+
         }
     }
 }
