@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 namespace Hunkoro
 {
     /// <summary>
-    ///クリックでタイトルに戻ります。
+    ///ゲームオーバー時、クリックでタイトルに戻ります。
     /// </summary>
     public class GiveUpButtonController : MonoBehaviour
     {
@@ -15,6 +15,8 @@ namespace Hunkoro
         [SerializeField]
         private AudioClip sound = null;
 
+        private bool isPressed = false;
+
         private void Start()
         {
             audioSource = GetComponent<AudioSource>();
@@ -22,7 +24,8 @@ namespace Hunkoro
 
         private void OnMouseEnter()
         {
-            transform.localScale = new Vector3(1.2f, 1.2f, 1);
+            if (!isPressed)
+                transform.localScale = new Vector3(1.2f, 1.2f, 1);
         }
         private void OnMouseExit()
         {
@@ -30,7 +33,11 @@ namespace Hunkoro
         }
         private void OnMouseDown()
         {
-            StartCoroutine(LoadTitleScene());
+            if (!isPressed)
+            {
+                isPressed = true;
+                StartCoroutine(LoadTitleScene());
+            }
         }
 
         private IEnumerator LoadTitleScene()
