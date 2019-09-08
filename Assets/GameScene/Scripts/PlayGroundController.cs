@@ -68,7 +68,7 @@ namespace Hunkoro
         //GAMEMODE.CLEARで呼び出される
         void Clear()
         {
-
+            rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
         }
     }
 }

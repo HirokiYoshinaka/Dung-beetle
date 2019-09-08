@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Hunkoro
 {
@@ -89,6 +90,9 @@ namespace Hunkoro
         //ゲームオーバー演出
         [SerializeField]
         private GameObject gameOver = null;
+        //クリア演出
+        [SerializeField]
+        private GameObject clear = null;
 
         // Start is called before the first frame update
         void Start()
@@ -111,7 +115,8 @@ namespace Hunkoro
 
             this.animator.SetInteger("Level", 1);
             this.animator.speed = 0;
-
+            UnkoScore = 0;
+            timeScore = 0;
         }
 
         // Update is called once per frame
@@ -349,6 +354,8 @@ namespace Hunkoro
                     break;
                 //ゴールしたとき？の処理
                 case "Goal":
+                    ChangeClear();
+                    StartCoroutine(GoClearScene());
                     break;
                 default:
                     break;
@@ -361,12 +368,28 @@ namespace Hunkoro
             rigidbody.velocity = new Vector2(0, 0);
         }
 
+        //ゴールしたときに呼び出す
+        private void ChangeClear()
+        {
+            rigidbody.velocity = new Vector2(0, 0);
+            GameSpeed = 0;
+            sound.Stop();
+            GameMode = GAMEMODE.CLEAR;
+        }
+
         //GAMEMODE.CLEARで呼び出される
         private void Clear()
         {
 
         }
 
+        private IEnumerator GoClearScene()
+        {
+            clear.SetActive(true);
+            HighScoreManager.AddScore(new Score(UnkoScore, timeScore));
+            yield return new WaitForSeconds(1);
+            SceneManager.LoadScene("ClearScene");
+        }
 
     }
 }

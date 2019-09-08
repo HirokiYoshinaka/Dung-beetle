@@ -5,10 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Hunkoro
 {
-    /// <summary>
-    ///クリックでGameSceneをリロードします。
-    /// </summary>
-    public class RetryButtonController : MonoBehaviour
+    public class BackTitleButtonController : MonoBehaviour
     {
         private void OnMouseEnter()
         {
@@ -20,8 +17,7 @@ namespace Hunkoro
         }
         private void OnMouseDown()
         {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("TitleScene");
         }
     }
 }
