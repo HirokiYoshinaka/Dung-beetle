@@ -236,6 +236,7 @@ MonoBehaviour:
   sideMovingSpeed: 0
   GameSpeed: -2
   BGM: {fileID: 1292782883}
+  startAudio: {fileID: 8300000, guid: cfc7ab518c8a00146891dde5791be2a2, type: 3}
   gameOver: {fileID: 1602445301}
   clear: {fileID: 289712873}
 --- !u!58 &40631865

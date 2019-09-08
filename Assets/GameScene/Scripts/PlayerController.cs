@@ -86,6 +86,9 @@ namespace Hunkoro
         //BGM
         [SerializeField]
         private BGMManager BGM = null;
+        //スタート時の効果音
+        [SerializeField]
+        private AudioClip startAudio = null;
 
         //ゲームオーバー演出
         [SerializeField]
@@ -182,6 +185,7 @@ namespace Hunkoro
                     var child = transform.Find("ClickHere").gameObject;
                     child.SetActive(false);
                     StartCoroutine(StartAnimation());
+                    sound.PlayOneShot(startAudio);
                     BGM.StartPlayBGM();
                     GameMode = GAMEMODE.PLAY;
                     break;
