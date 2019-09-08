@@ -181,6 +181,7 @@ namespace Hunkoro
                     this.animator.speed = 1;
                     var child = transform.Find("ClickHere").gameObject;
                     child.SetActive(false);
+                    StartCoroutine(StartAnimation());
                     BGM.StartPlayBGM();
                     GameMode = GAMEMODE.PLAY;
                     break;
@@ -189,6 +190,14 @@ namespace Hunkoro
             }
         }
         //ここまでポップアップのための処理
+
+        private IEnumerator StartAnimation()
+        {
+            var child = transform.Find("GoToGoal").gameObject;
+            child.SetActive(true);
+            yield return new WaitForSeconds(1);
+            child.SetActive(false);
+        }
 
         //GAMEMODE.PLAYで呼び出される
         private void Play()
