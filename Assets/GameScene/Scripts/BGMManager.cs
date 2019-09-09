@@ -31,5 +31,10 @@ namespace Hunkoro
             audioSource.clip = music;
             audioSource.Play();
         }
+
+        public void StopBGM()
+        {
+            audioSource.Stop();
+        }
     }
 }

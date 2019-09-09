@@ -306,6 +306,7 @@ namespace Hunkoro
             this.animator.SetInteger("Level", 0);
             GameSpeed = 0;
             sound.Stop();
+            BGM.StopBGM();
             gameOver.SetActive(true);
             GameMode = GAMEMODE.GAMEOVER;
         }
