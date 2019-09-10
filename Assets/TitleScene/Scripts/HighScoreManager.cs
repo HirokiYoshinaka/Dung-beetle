@@ -20,12 +20,21 @@ namespace Hunkoro
 
     public class HighScoreManager : MonoBehaviour
     {
-        public Text first_time = null;
-        public Text first_Score = null;
-        public Text second_time = null;
-        public Text second_Score = null;
-        public Text third_time = null;
-        public Text third_Score = null;
+        
+        [SerializeField]
+        private Text first_Score = null;
+        [SerializeField]
+        private Text first_time = null;
+        
+        [SerializeField]
+        private Text second_Score = null;
+        [SerializeField]
+        private Text second_time = null;
+        
+        [SerializeField]
+        private Text third_Score = null;
+        [SerializeField]
+        private Text third_time = null;
 
         static Score[] highScores 
             = new Score[3] { new Score(0, 0), new Score(0, 0), new Score(0, 0) };
@@ -33,7 +42,7 @@ namespace Hunkoro
         // Start is called before the first frame update
         void Start()
         {
-
+            LoadHighScores();
         }
 
         // Update is called once per frame
@@ -68,6 +77,31 @@ namespace Hunkoro
             {
                 highScores[2] = new Score(s.scoreCount, s.time);
             }
+            SaveHighScores();
+        }
+
+        //このstatic正直よく理解できてない
+        private static void SaveHighScores()
+        {
+            //キーセット
+            PlayerPrefs.SetInt("First_Score", highScores[0].scoreCount);
+            PlayerPrefs.SetFloat("First_Time", highScores[0].time);
+            PlayerPrefs.SetInt("Second_Score", highScores[1].scoreCount);
+            PlayerPrefs.SetFloat("Second_Time", highScores[1].time);
+            PlayerPrefs.SetInt("Third_Score", highScores[2].scoreCount);
+            PlayerPrefs.SetFloat("Third_Time", highScores[2].time);
+            //ディスク保存
+            PlayerPrefs.Save();
+        }
+
+        private void LoadHighScores()
+        {
+            highScores[0].scoreCount = PlayerPrefs.GetInt("First_Score");
+            highScores[0].time = PlayerPrefs.GetFloat("First_Time");
+            highScores[1].scoreCount = PlayerPrefs.GetInt("Second_Score");
+            highScores[1].time = PlayerPrefs.GetFloat("Second_Time");
+            highScores[2].scoreCount = PlayerPrefs.GetInt("Third_Score");
+            highScores[2].time = PlayerPrefs.GetFloat("Third_Time");
         }
     }
 }
