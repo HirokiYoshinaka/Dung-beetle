@@ -37,8 +37,7 @@ namespace Hunkoro
             if (transform.position.y < 0)
             {
                 transform.position = new Vector3(0, transform.position.y + 10, 0);
-                //ChooseField();
-                GenarateField_2();
+                ChooseField();
             }
         }
 
@@ -46,8 +45,8 @@ namespace Hunkoro
         void ChooseField()
         {
             //patternを０に戻さずループすることでレアなフィールドの出現などが簡単に実装できそう
-            //switch (pattern % 9)
-            switch (Random.Range(0, 9))
+            switch (pattern % 10)
+            //switch (Random.Range(0, 9))
             {
                 case 0:
                     GenarateField_1();
@@ -76,6 +75,38 @@ namespace Hunkoro
                 case 8:
                     GenarateField_9();
                     break;
+                case 9:
+                    switch(Random.Range(0, 9))
+                    {
+                        case 0:
+                            GenarateField_1();
+                            break;
+                        case 1:
+                            GenarateField_2();
+                            break;
+                        case 2:
+                            GenarateField_3();
+                            break;
+                        case 3:
+                            GenarateField_4();
+                            break;
+                        case 4:
+                            GenerateField_5();
+                            break;
+                        case 5:
+                            GenarateField_6();
+                            break;
+                        case 6:
+                            GenarateField_7();
+                            break;
+                        case 7:
+                            GenarateField_8();
+                            break;
+                        case 8:
+                            GenarateField_9();
+                            break;
+                    }
+                    break;
             }
             pattern++;
         }
@@ -89,9 +120,11 @@ namespace Hunkoro
             unko.Genarate(0.5f, 13.5f);
             unko.Genarate(1.5f, 9f);
             unko.Genarate(2f, 15f);
+
             stone.Genarate(-2f, 8.5f);
             stone.Genarate(2f, 13f);
-            cactus.Genarate(-1.5f, 15f);
+
+            cactus.Genarate(-1.5f, 15f,1);
             cactus.Genarate(-1f, 12.5f);
             goal.Genarate(2.5f, 8f);
         }
@@ -107,8 +140,10 @@ namespace Hunkoro
             unko.Genarate(1.5f, 8.5f);
             unko.Genarate(3f, 12.5f);
             stone.Genarate(0f, 9.5f);
+
             cactus.Genarate(-3f, 7f);
             cactus.Genarate(-1.5f, 12f);
+
             goal.Genarate(-2.5f, 10.5f);
             goal.Genarate(3.5f, 14.5f);
         }
@@ -124,8 +159,9 @@ namespace Hunkoro
             unko.Genarate(2f, 7.5f);
             unko.Genarate(2f, 12f);
             unko.Genarate(3, 15f);
+
             cactus.Genarate(-2.5f, 15f);
-            cactus.Genarate(-2f, 9.5f);
+            cactus.Genarate(-2f, 9.5f,1);
             cactus.Genarate(0.5f, 12f);
         }
 
@@ -134,14 +170,15 @@ namespace Hunkoro
             unko.Genarate(0f, 10.5f);
             unko.Genarate(1.5f, 15f);
             unko.Genarate(1.5f, 7.5f);
+
             cactus.Genarate(-3.5f, 14.5f);
-            cactus.Genarate(-2.5f, 11f);
+            cactus.Genarate(-2.5f, 11f,1);
             cactus.Genarate(-2.5f, 17.5f);
             cactus.Genarate(-1f, 13.5f);
-            cactus.Genarate(0f, 15f);
+            cactus.Genarate(0f, 15f,1);
             cactus.Genarate(0f, 8f);
             cactus.Genarate(1f, 12f);
-            cactus.Genarate(2.5f, 8.5f);
+            cactus.Genarate(2.5f, 8.5f,1);
             cactus.Genarate(3.5f, 13.5f);
         }
 
@@ -181,8 +218,8 @@ namespace Hunkoro
             stone.Genarate(0f, 7.5f);
             cactus.Genarate(-3f, 11.5f);
             cactus.Genarate(-2.5f, 8.5f);
-            cactus.Genarate(-1f, 12.5f);
-            cactus.Genarate(0f, 9.5f);
+            cactus.Genarate(-1f, 12.5f,1);
+            cactus.Genarate(0f, 9.5f,1);
             cactus.Genarate(1.5f, 8.5f);
             cactus.Genarate(2f, 14.5f);
         }
@@ -227,10 +264,10 @@ namespace Hunkoro
             cactus.Genarate(1.5f, 10f);
             cactus.Genarate(1.5f, 9.5f);
 
-            cactus.Genarate(1f, 12f);
-            cactus.Genarate(1f, 11.5f);
-            cactus.Genarate(-1f, 12f);
-            cactus.Genarate(-1f, 11.5f);
+            cactus.Genarate(1f, 12f,1);
+            cactus.Genarate(1f, 11.5f,1);
+            cactus.Genarate(-1f, 12f,1);
+            cactus.Genarate(-1f, 11.5f,1);
         }
 
         void GenarateField_8()
@@ -256,10 +293,10 @@ namespace Hunkoro
             cactus.Genarate(-2f, 7.5f);
             cactus.Genarate(-2f, 13.5f);
 
-            cactus.Genarate(1f, 6.5f);
-            cactus.Genarate(1f, 14.5f);
-            cactus.Genarate(-1f, 6.5f);
-            cactus.Genarate(-1f, 14.5f);
+            cactus.Genarate(1f, 6.5f,1);
+            cactus.Genarate(1f, 14.5f,1);
+            cactus.Genarate(-1f, 6.5f,1);
+            cactus.Genarate(-1f, 14.5f,1);
 
             goal.Genarate(2f, 13f);
         }

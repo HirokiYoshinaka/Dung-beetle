@@ -54,6 +54,8 @@ namespace Hunkoro
         private float spriteWidth;
         //当たり判定の大きさ変更
         private CircleCollider2D collider2d = null;
+        //点滅
+        private SpriteRenderer spriteRenderer = null;
         //SE
         private AudioSource sound = null;
 
@@ -116,6 +118,8 @@ namespace Hunkoro
             //
             animator = GetComponent<Animator>();
 
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
             this.animator.SetInteger("Level", 1);
             this.animator.speed = 0;
             UnkoScore = 0;
@@ -157,7 +161,7 @@ namespace Hunkoro
             switch (GameMode)
             {
                 case GAMEMODE.STAY_START:
-                    transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                    transform.localScale = new Vector3(1.3f, 1.3f, 1);
                     break;
                 default:
                     break;
@@ -360,19 +364,23 @@ namespace Hunkoro
                 case "Unko":
                     //スコア加算
                     UnkoScore++;
+                    StartCoroutine(GetAnimation());
                     break;
                 //石に当たったときの処理
                 case "Stone":
                     //ペナルティ
                     UnkoScore -= 5;
+                    StartCoroutine(DamagedAnimaton());
                     break;
                 //サボテンに当たったときの処理
                 case "Cactus":
                     //ペナルティ
                     UnkoScore -= 1;
+                    StartCoroutine(DamagedAnimaton());
                     break;
                 case "BigCactus":
                     UnkoScore -= 2;
+                    StartCoroutine(DamagedAnimaton());
                     break;
                 //ゴールしたとき？の処理
                 case "Goal":
@@ -383,6 +391,26 @@ namespace Hunkoro
                     break;
             }
         }
+
+        private IEnumerator GetAnimation()
+        {
+            transform.localScale = new Vector3(1.1f, 1.1f, 1);
+            yield return new WaitForSeconds(0.1f);
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+
+        private IEnumerator DamagedAnimaton()
+        {
+            spriteRenderer.color = new Color(1, 1, 1, 0.3f);
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.color = new Color(1, 1, 1, 1);
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.color = new Color(1, 1, 1, 0.3f);
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.color = new Color(1, 1, 1, 1);
+        }
+
+        
 
         //GAMEMODE.GAMEOVERで呼び出される
         private void GameOver()
