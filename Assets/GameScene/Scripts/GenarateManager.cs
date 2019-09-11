@@ -45,7 +45,8 @@ namespace Hunkoro
         void ChooseField()
         {
             //patternを０に戻さずループすることでレアなフィールドの出現などが簡単に実装できそう
-            switch (pattern % 6)
+            //switch (pattern % 9)
+            switch (Random.Range(0,9))
             {
                 case 0:
                     GenarateField_1();
@@ -64,6 +65,15 @@ namespace Hunkoro
                     break;
                 case 5:
                     GenarateField_6();
+                    break;
+                case 6:
+                    GenarateField_7();
+                    break;
+                case 7:
+                    GenarateField_8();
+                    break;
+                case 8:
+                    GenarateField_9();
                     break;
             }
             pattern++;
@@ -174,6 +184,106 @@ namespace Hunkoro
             cactus.Genarate(0f, 9.5f);
             cactus.Genarate(1.5f, 8.5f);
             cactus.Genarate(2f, 14.5f);
+        }
+
+        void GenarateField_7()
+        {
+            unko.Genarate(-3f, 10f);
+            unko.Genarate(-1.5f, 6.5f);
+            unko.Genarate(-1.5f, 9f);
+            unko.Genarate(-1f, 10.5f);
+            unko.Genarate(1f, 9.5f);
+            unko.Genarate(1.5f, 7.5f);
+            unko.Genarate(3f, 10f);
+
+            stone.Genarate(-2.5f, 14f);
+            stone.Genarate(0f, 14.5f);
+            stone.Genarate(2.5f, 14f);
+
+            cactus.Genarate(-2f, 9f);
+            cactus.Genarate(-2f, 8.5f);
+            cactus.Genarate(-2f, 8f);
+            cactus.Genarate(-2f, 7.5f);
+            cactus.Genarate(-2f, 7f);
+            cactus.Genarate(-2f, 6.5f);
+            cactus.Genarate(-2f, 6f);
+
+            cactus.Genarate(2f, 9f);
+            cactus.Genarate(2f, 8.5f);
+            cactus.Genarate(2f, 8f);
+            cactus.Genarate(2f, 7.5f);
+            cactus.Genarate(2f, 7f);
+            cactus.Genarate(2f, 6.5f);
+            cactus.Genarate(2f, 6f);
+
+            cactus.Genarate(-1.5f, 11f);
+            cactus.Genarate(-1.5f, 10.5f);
+            cactus.Genarate(-1.5f, 10f);
+            cactus.Genarate(-1.5f, 9.5f);
+
+            cactus.Genarate(1.5f, 11f);
+            cactus.Genarate(1.5f, 10.5f);
+            cactus.Genarate(1.5f, 10f);
+            cactus.Genarate(1.5f, 9.5f);
+
+            cactus.Genarate(1f, 12f);
+            cactus.Genarate(1f, 11.5f);
+            cactus.Genarate(-1f, 12f);
+            cactus.Genarate(-1f, 11.5f);
+        }
+
+        void GenarateField_8()
+        {
+            unko.Genarate(-1.5f, 10.5f);
+            unko.Genarate(1.5f, 10.5f);
+            unko.Genarate(-1f, 9f);
+            unko.Genarate(-1f, 12f);
+            unko.Genarate(1f, 9f);
+            unko.Genarate(1f, 12f);
+            unko.Genarate(0f, 8.5f);
+            unko.Genarate(0f, 12.5f);
+
+            stone.Genarate(0f, 10.5f);
+
+            cactus.Genarate(2.5f, 11.5f);
+            cactus.Genarate(2.5f, 9.5f);
+            cactus.Genarate(-2.5f, 11.5f);
+            cactus.Genarate(-2.5f, 9.5f);
+
+            cactus.Genarate(2f, 7.5f);
+            cactus.Genarate(2f, 13.5f);
+            cactus.Genarate(-2f, 7.5f);
+            cactus.Genarate(-2f, 13.5f);
+
+            cactus.Genarate(1f, 6.5f);
+            cactus.Genarate(1f, 14.5f);
+            cactus.Genarate(-1f, 6.5f);
+            cactus.Genarate(-1f, 14.5f);
+
+            goal.Genarate(2f, 13f);
+        }
+
+        void GenarateField_9()
+        {
+            unko.Genarate(-2.5f, 14f);
+            stone.Genarate(-2f, 14f);
+            unko.Genarate(-1.5f, 14f);
+
+            unko.Genarate(-2.5f, 7.5f);
+            stone.Genarate(-2f, 7.5f);
+            unko.Genarate(-1.5f, 7.5f);
+
+            unko.Genarate(-0.5f, 11f);
+            stone.Genarate(0f, 11f);
+            unko.Genarate(0.5f, 11f);
+
+            unko.Genarate(2.5f, 14f);
+            stone.Genarate(2f, 14f);
+            unko.Genarate(1.5f, 14f);
+
+            unko.Genarate(2.5f, 7.5f);
+            stone.Genarate(2f, 7.5f);
+            unko.Genarate(1.5f, 7.5f);
         }
     }
 }
