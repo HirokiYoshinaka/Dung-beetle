@@ -8,6 +8,7 @@ TagManager:
   - Unko
   - Cactus
   - Goal
+  - BigCactus
   layers:
   - Default
   - TransparentFX

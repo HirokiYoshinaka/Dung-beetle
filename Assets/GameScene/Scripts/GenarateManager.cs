@@ -37,7 +37,8 @@ namespace Hunkoro
             if (transform.position.y < 0)
             {
                 transform.position = new Vector3(0, transform.position.y + 10, 0);
-                ChooseField();
+                //ChooseField();
+                GenarateField_2();
             }
         }
 
@@ -46,7 +47,7 @@ namespace Hunkoro
         {
             //patternを０に戻さずループすることでレアなフィールドの出現などが簡単に実装できそう
             //switch (pattern % 9)
-            switch (Random.Range(0,9))
+            switch (Random.Range(0, 9))
             {
                 case 0:
                     GenarateField_1();

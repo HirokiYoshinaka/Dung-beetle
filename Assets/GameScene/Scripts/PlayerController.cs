@@ -242,6 +242,11 @@ namespace Hunkoro
 
             //レベルに応じて設定していく部分
             //関数分けるべきか？
+
+            const int lv2 = 7;
+            const int lv3 = lv2 + 8;
+            const int lv4 = lv3 + 9;
+            const int lv5 = lv4 + 10;
             switch (playerLevel)
             {
                 case PLAYER_LEVEL.Lv1:
@@ -252,18 +257,18 @@ namespace Hunkoro
                         ChangeGameOver();
                         //Gameoverのanimation
                     }
-                    else if (2 <= UnkoScore)
+                    else if (lv2 <= UnkoScore)
                     {
                         ChangeLv2();
                     }
                     break;
                 case PLAYER_LEVEL.Lv2:
                     GameSpeed = -2.5f;
-                    if (UnkoScore < 2)
+                    if (UnkoScore < lv2)
                     {
                         ChangeLv1();
                     }
-                    else if (4 <= UnkoScore)
+                    else if (lv3 <= UnkoScore)
                     {
                         ChangeLv3();
                     }
@@ -271,29 +276,29 @@ namespace Hunkoro
 
                 case PLAYER_LEVEL.Lv3:
                     GameSpeed = -3.0f;
-                    if (UnkoScore < 4)
+                    if (UnkoScore < lv3)
                     {
                         ChangeLv2();
                     }
-                    else if (6 <= UnkoScore)
+                    else if (lv4 <= UnkoScore)
                     {
                         ChangeLv4();
                     }
                     break;
                 case PLAYER_LEVEL.Lv4:
                     GameSpeed = -3.5f;
-                    if (UnkoScore < 6)
+                    if (UnkoScore < lv4)
                     {
                         ChangeLv3();
                     }
-                    else if (8 <= UnkoScore)
+                    else if (lv5 <= UnkoScore)
                     {
                         ChangeLv5();
                     }
                     break;
                 case PLAYER_LEVEL.Lv5:
                     GameSpeed = -4.0f;
-                    if (UnkoScore < 8)
+                    if (UnkoScore < lv5)
                     {
                         ChangeLv4();
                     }
@@ -364,6 +369,9 @@ namespace Hunkoro
                 //サボテンに当たったときの処理
                 case "Cactus":
                     //ペナルティ
+                    UnkoScore -= 1;
+                    break;
+                case "BigCactus":
                     UnkoScore -= 2;
                     break;
                 //ゴールしたとき？の処理
