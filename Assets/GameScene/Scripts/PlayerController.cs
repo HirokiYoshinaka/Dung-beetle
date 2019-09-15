@@ -368,6 +368,12 @@ namespace Hunkoro
                         UnkoScore++;
                         StartCoroutine(GetAnimation());
                         break;
+                    case "SilverUnko":
+                        //パワーアップ？
+                        break;
+                    case "GoldUnko":
+                        //パワーアップ？
+                        break;
                     //石に当たったときの処理
                     case "Stone":
                         //ペナルティ
