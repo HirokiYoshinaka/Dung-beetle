@@ -5,70 +5,73 @@ using UnityEngine;
 
 namespace Hunkoro
 {
-    /// <summary>
-    /// 背景（その他のオブジェクトも）を動かすことで
-    /// Playerのy軸を移動させずに縦移動しているかのように見せかけます。
-    /// </summary>
-    public class PlayGroundController : MonoBehaviour
+    namespace GameScene
     {
-        [SerializeField]
-        private GameObject player = null;
-        private PlayerController playerController;
-        //
-        private new Rigidbody2D rigidbody;
-        // Start is called before the first frame update
-        void Start()
+        /// <summary>
+        /// 背景（その他のオブジェクトも）を動かすことで
+        /// Playerのy軸を移動させずに縦移動しているかのように見せかけます。
+        /// </summary>
+        public class PlayGroundController : MonoBehaviour
         {
-            playerController = player.GetComponent<PlayerController>();
-            this.rigidbody = GetComponent<Rigidbody2D>();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            //プレイヤーの状態に応じて変化
-            switch (playerController.GetGameMode())
+            [SerializeField]
+            private GameObject player = null;
+            private PlayerController playerController;
+            //
+            private new Rigidbody2D rigidbody;
+            // Start is called before the first frame update
+            void Start()
             {
-                case GAMEMODE.STAY_START:
-                    StayStart();
-                    break;
-                case GAMEMODE.PLAY:
-                    Play();
-                    break;
-                case GAMEMODE.GAMEOVER:
-                    GameOver();
-                    break;
-                case GAMEMODE.CLEAR:
-                    Clear();
-                    break;
+                playerController = player.GetComponent<PlayerController>();
+                this.rigidbody = GetComponent<Rigidbody2D>();
             }
-        }
-        //GAMEMODE.STAY_STARTで呼び出される
-        void StayStart()
-        {
 
-        }
-
-        //GAMEMODE.PLAYで呼び出される
-        void Play()
-        {
-            rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
-            if (transform.position.y < -15)
+            // Update is called once per frame
+            void Update()
             {
-                transform.position = new Vector3(0, transform.position.y + 40, 0);
+                //プレイヤーの状態に応じて変化
+                switch (playerController.GetGameMode())
+                {
+                    case GAMEMODE.STAY_START:
+                        StayStart();
+                        break;
+                    case GAMEMODE.PLAY:
+                        Play();
+                        break;
+                    case GAMEMODE.GAMEOVER:
+                        GameOver();
+                        break;
+                    case GAMEMODE.CLEAR:
+                        Clear();
+                        break;
+                }
             }
-        }
+            //GAMEMODE.STAY_STARTで呼び出される
+            void StayStart()
+            {
 
-        //GAMEMODE.GAMEOVERで呼び出される
-        void GameOver()
-        {
-            rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
-        }
+            }
 
-        //GAMEMODE.CLEARで呼び出される
-        void Clear()
-        {
-            rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
+            //GAMEMODE.PLAYで呼び出される
+            void Play()
+            {
+                rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
+                if (transform.position.y < -15)
+                {
+                    transform.position = new Vector3(0, transform.position.y + 40, 0);
+                }
+            }
+
+            //GAMEMODE.GAMEOVERで呼び出される
+            void GameOver()
+            {
+                rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
+            }
+
+            //GAMEMODE.CLEARで呼び出される
+            void Clear()
+            {
+                rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
+            }
         }
     }
 }

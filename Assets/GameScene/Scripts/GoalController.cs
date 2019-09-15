@@ -4,37 +4,40 @@ using UnityEngine;
 
 namespace Hunkoro
 {
-    public class GoalController : MonoBehaviour
+    namespace GameScene
     {
-        //Genaratorからセットするのでpublicに
-        public GameObject player = null;
-        public PlayerController playerController = null;
-        private new Rigidbody2D rigidbody;
-        // Start is called before the first frame update
-        void Start()
+        public class GoalController : MonoBehaviour
         {
-            //playerController = player.GetComponent<PlayerController>();
-            this.rigidbody = GetComponent<Rigidbody2D>();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
-            //画面外
-            if (transform.position.y < -6)
+            //Genaratorからセットするのでpublicに
+            public GameObject player = null;
+            public PlayerController playerController = null;
+            private new Rigidbody2D rigidbody;
+            // Start is called before the first frame update
+            void Start()
             {
-                //オブジェクトのDestroy
-                Destroy(gameObject);
+                //playerController = player.GetComponent<PlayerController>();
+                this.rigidbody = GetComponent<Rigidbody2D>();
             }
-        }
 
-        //当たり判定の処理部分
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.tag == "Player")
+            // Update is called once per frame
+            void Update()
             {
-                
+                rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
+                //画面外
+                if (transform.position.y < -6)
+                {
+                    //オブジェクトのDestroy
+                    Destroy(gameObject);
+                }
+            }
+
+            //当たり判定の処理部分
+            private void OnTriggerEnter2D(Collider2D collision)
+            {
+                if (collision.tag == "Player")
+                {
+
+                }
             }
         }
     }

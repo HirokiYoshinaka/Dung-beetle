@@ -5,22 +5,25 @@ using UnityEngine.UI;
 
 namespace Hunkoro
 {
-    /// <summary>
-    /// スコアの表示を行います
-    /// </summary>
-    public class ScoreManager : MonoBehaviour
+    namespace GameScene
     {
-        private Text text;
-        // Start is called before the first frame update
-        void Start()
+        /// <summary>
+        /// スコアの表示を行います
+        /// </summary>
+        public class ScoreManager : MonoBehaviour
         {
-            this.text = GetComponent<Text>();
-        }
+            private Text text;
+            // Start is called before the first frame update
+            void Start()
+            {
+                this.text = GetComponent<Text>();
+            }
 
-        // Update is called once per frame
-        void Update()
-        {
-            text.text = "あつめたうんこ：" + PlayerController.GetUnkoScore().ToString();
+            // Update is called once per frame
+            void Update()
+            {
+                text.text = "あつめたうんこ：" + PlayerController.GetUnkoScore().ToString();
+            }
         }
     }
 }

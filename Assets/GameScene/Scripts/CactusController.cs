@@ -4,48 +4,51 @@ using UnityEngine;
 
 namespace Hunkoro
 {
-    public class CactusController : MonoBehaviour
+    namespace GameScene
     {
-        //Genaratorからセットするのでpublicに
-        public GameObject player = null;
-        public PlayerController playerController = null;
-        private new Rigidbody2D rigidbody;
-        //スプライト
-        SpriteRenderer MainSpriteRenderer;
-        public Sprite BrokenSprite;
-        //SE
-        public AudioClip hitSound;
-        AudioSource audioSource;
-
-        // Start is called before the first frame update
-        void Start()
+        public class CactusController : MonoBehaviour
         {
-            //playerController = player.GetComponent<PlayerController>();
-            this.rigidbody = GetComponent<Rigidbody2D>();
-            MainSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-            audioSource = gameObject.GetComponent<AudioSource>();
-        }
+            //Genaratorからセットするのでpublicに
+            public GameObject player = null;
+            public PlayerController playerController = null;
+            private new Rigidbody2D rigidbody;
+            //スプライト
+            SpriteRenderer MainSpriteRenderer;
+            public Sprite BrokenSprite;
+            //SE
+            public AudioClip hitSound;
+            AudioSource audioSource;
 
-        // Update is called once per frame
-        void Update()
-        {
-            rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
-            //画面外
-            if (transform.position.y < -6)
+            // Start is called before the first frame update
+            void Start()
             {
-                //オブジェクトのDestroy
-                Destroy(gameObject);
+                //playerController = player.GetComponent<PlayerController>();
+                this.rigidbody = GetComponent<Rigidbody2D>();
+                MainSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+                audioSource = gameObject.GetComponent<AudioSource>();
             }
-        }
 
-        //当たり判定の処理部分
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.tag == "Player")
+            // Update is called once per frame
+            void Update()
             {
-                MainSpriteRenderer.sprite = BrokenSprite;
-                audioSource.PlayOneShot(hitSound);
-                GetComponent<BoxCollider2D>().enabled = false;
+                rigidbody.velocity = new Vector2(0, playerController.GetSpeed());
+                //画面外
+                if (transform.position.y < -6)
+                {
+                    //オブジェクトのDestroy
+                    Destroy(gameObject);
+                }
+            }
+
+            //当たり判定の処理部分
+            private void OnTriggerEnter2D(Collider2D collision)
+            {
+                if (collision.tag == "Player")
+                {
+                    MainSpriteRenderer.sprite = BrokenSprite;
+                    audioSource.PlayOneShot(hitSound);
+                    GetComponent<BoxCollider2D>().enabled = false;
+                }
             }
         }
     }
