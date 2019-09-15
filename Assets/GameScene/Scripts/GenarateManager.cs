@@ -17,11 +17,16 @@ namespace Hunkoro
             [SerializeField]
             private UnkoGenarator unko = null;
             [SerializeField]
+            private GoldUnkoGenarator goldUnko = null;
+            [SerializeField]
+            private SilverUnkoGenarator silverUnko = null;
+            [SerializeField]
             private StoneGenarator stone = null;
             [SerializeField]
             private CactusGenarator cactus = null;
             [SerializeField]
             private GoalGenarator goal = null;
+            
 
             [SerializeField]
             private int pattern = 0;
@@ -39,7 +44,9 @@ namespace Hunkoro
                 if (transform.position.y < 0)
                 {
                     transform.position = new Vector3(0, transform.position.y + 10, 0);
-                    ChooseField();
+                    //ChooseField();
+                    goldUnko.Genarate(0, 4);
+                    silverUnko.Genarate(2, 4);
                 }
             }
 
