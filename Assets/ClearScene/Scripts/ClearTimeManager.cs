@@ -30,7 +30,7 @@ namespace Hunkoro
 
         private IEnumerator dispScore()
         {
-            float time = PlayerController.GetTimeScore();
+            float time = GameScene.PlayerController.GetTimeScore();
             time = Mathf.Round(time * 10) / 10;
             float t = 0;
 

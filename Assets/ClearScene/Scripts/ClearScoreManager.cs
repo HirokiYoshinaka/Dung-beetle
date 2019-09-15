@@ -29,7 +29,7 @@ namespace Hunkoro
         private IEnumerator dispScore()
         {
             int s = 0;
-            while (s < PlayerController.GetUnkoScore())
+            while (s < GameScene.PlayerController.GetUnkoScore())
             {
                 yield return new WaitForSeconds(0.1f);
                 s++;
