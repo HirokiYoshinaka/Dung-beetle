@@ -9,6 +9,9 @@ TagManager:
   - Cactus
   - Goal
   - BigCactus
+  - SilverUnko
+  - GoldUnko
+  - EnemyBird
   layers:
   - Default
   - TransparentFX
