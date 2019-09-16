@@ -407,6 +407,10 @@ namespace Hunkoro
                             StartCoroutine(DamagedAnimaton());
                         }
                         break;
+                    case "EnemyBird":
+                        UnkoScore = -1;
+                        ChangeGameOver();
+                        break;
                     //ゴールしたとき？の処理
                     case "Goal":
                         ChangeClear();
