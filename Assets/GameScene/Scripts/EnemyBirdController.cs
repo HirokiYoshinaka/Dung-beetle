@@ -12,8 +12,7 @@ namespace Hunkoro
         /// </summary>
         public class EnemyBirdController : MonoBehaviour
         {
-            [SerializeField]
-            private PlayerController player = null;
+            public PlayerController player = null;
             [SerializeField]
             private AudioClip audioClip = null;
 

@@ -16,26 +16,50 @@ namespace Hunkoro
             [SerializeField]
             private GameObject player = null;
             private PlayerController playerController;
-
+            [SerializeField]
+            private int spanCount = 0;
             // Start is called before the first frame update
             void Start()
             {
                 playerController = player.GetComponent<PlayerController>();
             }
 
-            //新しいインスタンスを生成する部分
-            public void Genarate(float x, float y)
+            private void Update()
             {
-                Genarate(new Vector3(x, y, 0));
+                if (playerController.GetGameMode() == GAMEMODE.PLAY)
+                {
+                    switch (playerController.GetPlayerLevel())
+                    {
+                        case PLAYER_LEVEL.Lv1:
+                        case PLAYER_LEVEL.Lv2:
+                            spanCount++;
+                            break;
+                        case PLAYER_LEVEL.Lv3:
+                        case PLAYER_LEVEL.Lv4:
+                            spanCount += 2;
+                            break;
+                        case PLAYER_LEVEL.Lv5:
+                            spanCount += 3;
+                            break;
+                    }
+                }
+                if(spanCount>1000)
+                {
+                    spanCount = 0;
+                    Genarate();
+                }
             }
-            public void Genarate(Vector3 pos)
+
+            //新しいインスタンスを生成する部分
+            //ランダム生成に変更
+            private void Genarate()
             {
                 //PrefabからGameObjectを生成
                 EnemyBirdController genarate = Instantiate(enemyBirdPrefab);
-                genarate.transform.position = pos;
+                genarate.transform.position 
+                    = new Vector3(Random.Range(-3.5f, 3.5f), -4, 0);
                 //新しいインスタンスにPlayerとPlay
-                genarate.player = player;
-                genarate.playerController = playerController;
+                genarate.player = playerController;
             }
         }
     }
