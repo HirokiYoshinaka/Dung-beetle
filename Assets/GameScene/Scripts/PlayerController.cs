@@ -85,6 +85,10 @@ namespace Hunkoro
                 return timeScore;
             }
 
+            //無敵？
+            [SerializeField]
+            private bool isRainbow = false;
+
             //アニメーション
             private Animator animator = null;
             //BGM
@@ -370,25 +374,38 @@ namespace Hunkoro
                         break;
                     case "SilverUnko":
                         //パワーアップ？
+                        UnkoScore += 3;
+                        StartCoroutine(GetSilverUnko());
                         break;
                     case "GoldUnko":
                         //パワーアップ？
+                        UnkoScore += 5;
+                        StartCoroutine(GetGoldUnko());
                         break;
                     //石に当たったときの処理
                     case "Stone":
                         //ペナルティ
-                        UnkoScore -= 5;
-                        StartCoroutine(DamagedAnimaton());
+                        if (!isRainbow)
+                        {
+                            UnkoScore -= 5;
+                            StartCoroutine(DamagedAnimaton());
+                        }
                         break;
                     //サボテンに当たったときの処理
                     case "Cactus":
                         //ペナルティ
-                        UnkoScore -= 1;
-                        StartCoroutine(DamagedAnimaton());
+                        if (!isRainbow)
+                        {
+                            UnkoScore -= 1;
+                            StartCoroutine(DamagedAnimaton());
+                        }
                         break;
                     case "BigCactus":
-                        UnkoScore -= 2;
-                        StartCoroutine(DamagedAnimaton());
+                        if (!isRainbow)
+                        {
+                            UnkoScore -= 2;
+                            StartCoroutine(DamagedAnimaton());
+                        }
                         break;
                     //ゴールしたとき？の処理
                     case "Goal":
@@ -398,6 +415,24 @@ namespace Hunkoro
                     default:
                         break;
                 }
+            }
+
+            private IEnumerator GetGoldUnko()
+            {
+                isRainbow = true;
+                animator.SetBool("isRainbow", true);
+                yield return new WaitForSeconds(5);
+                isRainbow = false;
+                animator.SetBool("isRainbow", false);
+            }
+
+            private IEnumerator GetSilverUnko()
+            {
+                isRainbow = true;
+                animator.SetBool("isRainbow", true);
+                yield return new WaitForSeconds(3);
+                isRainbow = false;
+                animator.SetBool("isRainbow", false);
             }
 
             private IEnumerator GetAnimation()

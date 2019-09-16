@@ -47,6 +47,10 @@ namespace Hunkoro
                     //ChooseField();
                     goldUnko.Genarate(0, 4);
                     silverUnko.Genarate(2, 4);
+                    cactus.Genarate(3, 6);
+                    cactus.Genarate(-3, 6, 1);
+                    stone.Genarate(-2, 6);
+
                 }
             }
 
