@@ -67,6 +67,23 @@ namespace Hunkoro
                 Rigidbody2D rb = child.GetComponent<Rigidbody2D>();
                 rb.velocity = new Vector2(0, -10);
             }
+
+            private void OnTriggerEnter2D(Collider2D collision)
+            {
+                //本体に触れたら
+                if (collision.gameObject.tag == "EnemyBird")
+                {
+                    GetComponent<SpriteRenderer>().enabled = false;
+                    StartCoroutine(Destroy());
+                }
+            }
+
+            //3秒後にお片付けする
+            private IEnumerator Destroy()
+            {
+                yield return new WaitForSeconds(3);
+                Destroy(gameObject);
+            }
         }
     }
 }
