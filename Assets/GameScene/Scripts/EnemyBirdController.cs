@@ -44,6 +44,8 @@ namespace Hunkoro
             {
                 //この時点でのPlayerの位置を目標とする
                 Vector3 targetPos = player.transform.position;
+                GameObject child = transform.Find("AttackBird").gameObject;
+                child.SetActive(true);
                 while (true)
                 {
                     yield return null;
@@ -61,14 +63,9 @@ namespace Hunkoro
             {
                 audioSource.PlayOneShot(audioClip);
                 yield return new WaitForSeconds(0.1f);
-                var collider = GetComponent<BoxCollider2D>();
-                collider.enabled = true;
-            }
-
-            // Update is called once per frame
-            void Update()
-            {
-
+                GameObject child = transform.Find("AttackBird").gameObject;
+                Rigidbody2D rb = child.GetComponent<Rigidbody2D>();
+                rb.velocity = new Vector2(0, -10);
             }
         }
     }
