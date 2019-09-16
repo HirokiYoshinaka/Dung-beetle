@@ -43,7 +43,7 @@ namespace Hunkoro
                             break;
                     }
                 }
-                if(spanCount>1000)
+                if(spanCount>1200)
                 {
                     spanCount = 0;
                     Genarate();

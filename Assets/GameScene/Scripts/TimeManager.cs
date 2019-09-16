@@ -27,7 +27,14 @@ namespace Hunkoro
                 //小数点一桁への切り上げ
                 time = Mathf.Round(time * 10) / 10;
                 //文字列の書式設定、Google検索は偉大
-                text.text = String.Format("せいぞんじかん：{0:0.0}びょう", time); ;
+                if (time > 0)
+                {
+                    text.text = String.Format("せいげんじかん：{0:0.0}びょう", time); ;
+                }
+                else
+                {
+                    text.text = String.Format("せいげんじかん：{0:0.0}びょう", 0); ;
+                }
             }
         }
     }

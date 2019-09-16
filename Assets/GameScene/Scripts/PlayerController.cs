@@ -79,7 +79,7 @@ namespace Hunkoro
             }
             //時間
             [SerializeField]
-            private static float timeScore = 0;
+            private static float timeScore = 60;
             public static float GetTimeScore()
             {
                 return timeScore;
@@ -129,7 +129,7 @@ namespace Hunkoro
                 this.animator.SetInteger("Level", 1);
                 this.animator.speed = 0;
                 UnkoScore = 0;
-                timeScore = 0;
+                timeScore = 60;
             }
 
             // Update is called once per frame
@@ -216,8 +216,12 @@ namespace Hunkoro
             //GAMEMODE.PLAYで呼び出される
             private void Play()
             {
-                //timeScoreを数える
-                timeScore += Time.deltaTime;
+                //timeScoreを減算していく
+                timeScore -= Time.deltaTime;
+                if(timeScore<0)
+                {
+                    UnkoScore = -1;
+                }
 
                 //このへんはちょいパクり
                 //マウス位置座標をVector2で取得
@@ -376,11 +380,13 @@ namespace Hunkoro
                         //パワーアップ？
                         UnkoScore += 3;
                         StartCoroutine(GetSilverUnko());
+                        StartCoroutine(GetAnimation());
                         break;
                     case "GoldUnko":
                         //パワーアップ？
                         UnkoScore += 5;
                         StartCoroutine(GetGoldUnko());
+                        StartCoroutine(GetAnimation());
                         break;
                     //石に当たったときの処理
                     case "Stone":
