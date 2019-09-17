@@ -241,7 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerController: {fileID: 0}
-  Sound: {fileID: 8300000, guid: 5c6623a3a5d36bb4e8d2b936852e9efd, type: 3}
+  Sound: {fileID: 8300000, guid: f8a9b1ba5f22da3448fb91fdd00a9f8b, type: 3}
 --- !u!95 &4691816405392315916
 Animator:
   serializedVersion: 3
